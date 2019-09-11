@@ -1,0 +1,4 @@
+/node_modules/
+/cypress/
+/.nyc_output/
+/coverage/

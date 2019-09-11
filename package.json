@@ -1,0 +1,25 @@
+{
+  "name": "web-prysmo",
+  "version": "0.0.0",
+  "description": "A web client implementation for Prysmo service gateway framework.",
+  "main": "dist/web-prysmo.min.js",
+  "scripts": {
+    "instrument": "nyc instrument --compact=false src coverage/inst",
+    "test": "./node_modules/.bin/cypress run -s **/*.js",
+    "coverage": "nyc report -r html -r text-summary",
+    "minify": "uglifyjs -c -m -o dist/web-prysmo.min.js src/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/prysmo/web-prysmo.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/prysmo/web-prysmo/issues"
+  },
+  "homepage": "https://gitlab.com/prysmo/web-prysmo#readme",
+  "dependencies": {
+    "cypress": "^3.4.1"
+  }
+}
