@@ -76,45 +76,24 @@
         });
     });
 
-        /*
-            it('Deve responder ao emit apenas uma vez', function () {
-            let ee = new this.EventEmitter();
-            var newid = ee.nextId;
-            ee.on('testando', function () {
-            });
-            ee.once('testando', function () {
-            });
-            ee.unset(newid, 'testando');
-            assert.equal(ee.once[event], 'testando');
-            assert.equal(newid, 1);
+    describe("#unset", function () {
 
-        });
-    });
-
-    describe("::unset", function () {
         it('Deve remover o listener especificado', function () {
             let ee = new this.EventEmitter();
-            var listener = ee.listeners['removendo'];
-            var id = ee.nextId;
-            ee.unset(id, 'removendo');
-            assert.equal(listener, 'removendo');
-
+            let id = ee.on('event', function () {});
+            ee.unset(id, 'event');
         });
+
         it ('Deve não falhar mesmo que o listener especificado não exista', function () {
             let ee = new this.EventEmitter();
-            var id = ee.netxID;
-            ee.unset(id, 'listener');
-            assert.equal(ee.unset[event], 'listeners');
-            assert.equal(ee, function);
-
+            assert.doesNotThrow( () => ee.unset('event') );
         });
     });
-*/
 });
 
-after(function() {
-    cy.window().then(win => {
-        if (typeof win.__coverage__ == 'object')
-            cy.writeFile('.nyc_output/out.json', JSON.stringify(win.__coverage__));
+    after(function() {
+        cy.window().then(win => {
+            if (typeof win.__coverage__ == 'object')
+                cy.writeFile('.nyc_output/out.json', JSON.stringify(win.__coverage__));
+        });
     });
-});
