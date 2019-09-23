@@ -5,7 +5,8 @@
   "main": "dist/web-prysmo.min.js",
   "scripts": {
     "instrument": "nyc instrument --compact=false src coverage/inst",
-    "test": "./node_modules/.bin/cypress run -s **/*.js"
+    "test": "./node_modules/.bin/cypress run -s **/*.js",
+    "coverage": "nyc report -r html -r text-summary"
   },
   "repository": {
     "type": "git",

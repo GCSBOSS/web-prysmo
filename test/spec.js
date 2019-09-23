@@ -1,5 +1,5 @@
 
-    describe("Event Emitter", function () {
+describe("Event Emitter", function () {
 
     beforeEach(function () {
         cy.visit('/test/res/index.html');
@@ -33,7 +33,7 @@
 
     describe("#emit", function () {
 
-        it ('Deve executar uma função registrada', function () {
+        it('Deve executar uma função registrada', function () {
             let ee = new this.EventEmitter();
             var rodou = false;
             ee.on('event', function () {
@@ -74,6 +74,7 @@
             ee.emit('test');
             assert.strictEqual(rodou, 1);
         });
+
     });
 
     describe("#unset", function () {
@@ -82,18 +83,36 @@
             let ee = new this.EventEmitter();
             let id = ee.on('event', function () {});
             ee.unset(id, 'event');
+            assert.strictEqual(typeof ee.listeners['event'][id], 'undefined');
         });
 
         it ('Deve não falhar mesmo que o listener especificado não exista', function () {
             let ee = new this.EventEmitter();
-            assert.doesNotThrow( () => ee.unset('event') );
+            assert.doesNotThrow( () => ee.unset(2, 'event'));
         });
+
     });
+
 });
 
-    after(function() {
-        cy.window().then(win => {
-            if (typeof win.__coverage__ == 'object')
-                cy.writeFile('.nyc_output/out.json', JSON.stringify(win.__coverage__));
-        });
+describe("Web Prysmo", function() {
+
+    beforeEach(function () {
+        cy.visit('/test/res/index.html');
+        cy.window().invoke('getEventEmitter').as('EventEmitter');
+        cy.window().invoke('getWebPrysmo').as('WebPrysmo');
     });
+
+    it.only("blsjbdljsbd", function() {
+        let prysmo = new this.WebPrysmo('ws://demos.kaazing.com/echo');
+        prysmo.send('hu3hu3hu3h', 'HEUEH');
+    });
+
+});
+
+after(function() {
+    cy.window().then(win => {
+        if (typeof win.__coverage__ == 'object')
+            cy.writeFile('.nyc_output/out.json', JSON.stringify(win.__coverage__));
+    });
+});
