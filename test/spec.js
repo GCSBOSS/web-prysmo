@@ -74,7 +74,6 @@ describe("Event Emitter", function () {
             ee.emit('test');
             assert.strictEqual(rodou, 1);
         });
-
     });
 
     describe("#unset", function () {
@@ -90,9 +89,7 @@ describe("Event Emitter", function () {
             let ee = new this.EventEmitter();
             assert.doesNotThrow( () => ee.unset(2, 'event'));
         });
-
     });
-
 });
 
 describe("Web Prysmo", function() {
@@ -103,16 +100,55 @@ describe("Web Prysmo", function() {
         cy.window().invoke('getWebPrysmo').as('WebPrysmo');
     });
 
-    it.only("blsjbdljsbd", function() {
-        let prysmo = new this.WebPrysmo('ws://demos.kaazing.com/echo');
-        prysmo.send('hu3hu3hu3h', 'HEUEH');
+    describe('constructor', function(){
+
+        it('Deve iniciar uma conexão com o servidor', function(){
+
+        });
+
+        it('Deve lançar uma exceção quando falhar a conexão', function(){
+            let prysmo = new this.WebPrysmo('ws://demos.kaazing.com/echo');
+        });
+
+        it('Deve enviar todas as mensagens na fila quando conectar', function(){
+            let prysmo = new this.WebPrysmo('ws://demos.kaazing.com/echo');
+                prysmo.send('mensagem1', 'teste');
+                prysmo.send('mensagem2', 'testando');
+                assert.strictEqual(prysmo.queue, 2);
+        });
     });
 
-});
+    describe('#send', function(){
 
-after(function() {
-    cy.window().then(win => {
-        if (typeof win.__coverage__ == 'object')
-            cy.writeFile('.nyc_output/out.json', JSON.stringify(win.__coverage__));
+        it('Deve enviar uma mensagem para o servidor', function () {
+            let prysmo = new this.WebPrysmo('ws://demos.kaazing.com/echo');
+            let msg = prysmo.send('test', 'testando');
+            assert.strictEqual(msg, 'string');
+        });
+    });
+
+    describe('#request', function(){
+
+        it('Deve executar um handler uma vez', function () {
+            let prysmo = new this.WebPrysmo('ws://demos.kaazing.com/echo');
+            prysmo.request('test', 'testando', function() {});
+            assert.strictEqual(typeof prysmo.listeners['test'], 'function');
+        });
+    });
+
+    describe('#subscribe', function(){
+
+        it('Deve solicitar um listener', function () {
+            let prysmo = new this.WebPrysmo('ws://demos.kaazing.com/echo');
+            prysmo.subscribe('test', function() {});
+            assert.strictEqual(typeof prysmo.listeners.test[0], 'function');
+        });
+    });
+
+    after(function() {
+        cy.window().then(win => {
+            if (typeof win.__coverage__ == 'object')
+                cy.writeFile('.nyc_output/out.json', JSON.stringify(win.__coverage__));
+        });
     });
 });
