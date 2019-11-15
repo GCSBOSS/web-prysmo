@@ -24,7 +24,7 @@ lint-js:
 # Performs unit testing.
 unit-test:
   services:
-    - prysmo/hello-prysmo
+    - prysmo/hello-prysmo:v0.0.2
   variables:
     HELLO_PRYSMO: ws://prysmo-hello-prysmo:7667
   coverage: '/Statements\s*:\s*(\d+(?:\.\d+)?\%)/'
