@@ -6,7 +6,8 @@
   "scripts": {
     "instrument": "nyc instrument --compact=false src coverage/inst",
     "test": "./node_modules/.bin/cypress run -s **/*.js",
-    "coverage": "nyc report -r html -r text-summary"
+    "coverage": "nyc report -r html -r text-summary",
+    "minify": "uglifyjs -c -m -o dist/web-prysmo.min.js src/*.js"
   },
   "repository": {
     "type": "git",
