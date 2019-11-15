@@ -1,3 +1,4 @@
+/* exported  WebPrysmo */
 
 class WebPrysmo {
 

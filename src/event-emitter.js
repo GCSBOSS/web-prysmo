@@ -1,3 +1,4 @@
+/* exported  EventEmitter */
 
 class EventEmitter {
 
@@ -27,7 +28,7 @@ class EventEmitter {
             h(...args);
     }
 
-    once(event, handler){
+    once(event, handler) {
 
         if(typeof this.listeners[event] == 'undefined')
             this.listeners[event] = {};
@@ -46,7 +47,7 @@ class EventEmitter {
             return;
         var hs = this.listeners[event];
         id = String(id);
-        if (id in hs)
+        if(id in hs)
             delete hs[id];
     }
 
