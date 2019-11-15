@@ -139,9 +139,8 @@ describe("Web Prysmo", function() {
     describe('#request', function(){
 
         it('Deve executar um handler uma vez', function(done) {
-            this.timeout(6000);
             let prysmo = new this.WebPrysmo(URL_TEST);
-            prysmo.request('hellos', '{}', () => done());
+            prysmo.request('hellos', 3, () => done());
         });
 
     });
