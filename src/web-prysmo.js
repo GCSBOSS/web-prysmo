@@ -4,6 +4,10 @@ class WebPrysmo {
     constructor (url) {
         this.ee = new EventEmitter();
         this.ws = new WebSocket(url);
+        this.ws.onerror = () => {
+            if(typeof this.onerror == 'function')
+                this.onerror();
+        };
         this.queue = [];
         this.ws.onmessage = msg => {
             let { endpoint, data } = JSON.parse(msg.data);
@@ -31,4 +35,5 @@ class WebPrysmo {
         this.ee.once('ep$' + endpoint, cb);
         this.send(endpoint, data);
     }
+
 }
