@@ -19,7 +19,7 @@ lint-js:
    - docker
  script:
    - npm install -g eslint
-   - eslint --ignore-pattern "**/*.min.js" $CI_PROJECT_DIR
+   - eslint --ignore-pattern "**/*.min.js" $CI_PROJECT_DIR/src
 
 # Performs unit testing.
 unit-test:
